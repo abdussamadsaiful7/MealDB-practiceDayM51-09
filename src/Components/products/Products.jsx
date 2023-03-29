@@ -8,6 +8,14 @@ import './Products.css';
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+
+    const handleShowAll =()=>{
+        setShowAll(true);
+    }
+    const handleLess =()=>{
+        setShowAll(false);
+    }
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products`)
@@ -27,27 +35,37 @@ const Products = () => {
     //         savedCart.push(addedProduct)
     //     }
     //     //console.log('added cart', addedProduct)
-        
+
     //    }
     // setCart(savedCart);
     // },[products])
 
 
-    const handleAddToCart = (product)=>{
+    const handleAddToCart = (product) => {
         const newCart = [...cart, product];
         setCart(newCart);
         addToDb(product.id);
-    }
+    };
 
     return (
         <div className='shop-container'>
             <div className='products-container'>
                 {
-                    products.map(product => <SingleProduct product={product} key={product.id} handleAddToCart={handleAddToCart} ></SingleProduct>)
+                    products && products.slice(0, showAll? 20:9).map(product => <SingleProduct product={product} key={product.id} handleAddToCart={handleAddToCart} ></SingleProduct>)
                 }
             </div>
             <div className='cart-container'>
-                <Cart cart={cart}/>
+                <Cart cart={cart} />
+            </div>
+            <div className='ml-96'>
+                {
+                    !showAll &&( <span onClick={handleShowAll}><button className="btn btn-secondary ml-36 mb-5  text-white rounded
+                    hover:bg-pink-400">See More</button></span> )
+                }
+                {
+                   showAll && ( <span onClick={handleLess}><button onClick={handleShowAll} className="btn btn-secondary ml-36 mb-5  text-white rounded
+                   hover:bg-pink-400">See Less</button></span> ) 
+                }
             </div>
         </div>
     );
