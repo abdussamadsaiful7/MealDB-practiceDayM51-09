@@ -6,7 +6,7 @@ import './Products.css';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
-   // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products`)
@@ -16,17 +16,22 @@ const Products = () => {
     // const handleAddToCart =(product)=>{
     //     console.log(handleAddToCart);
     // }
+    }, []);
 
-    }, [])
+    const handleAddToCart = (product)=>{
+        const newCart = [...cart, product];
+        setCart(newCart);
+    }
+
     return (
         <div className='shop-container'>
             <div className='products-container'>
                 {
-                    products.map(product => <SingleProduct product={product} key={product.id} ></SingleProduct>)
+                    products.map(product => <SingleProduct product={product} key={product.id} handleAddToCart={handleAddToCart} ></SingleProduct>)
                 }
             </div>
             <div className='cart-container'>
-                <Cart cart={products}/>
+                
             </div>
         </div>
     );
