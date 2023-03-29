@@ -18,7 +18,7 @@ const SingleProduct = (props) => {
                 <p>Rating: {rating.rate} Stars,  Count: {rating.count}</p>
             </div>
             <button onClick={() => handleAddToCart(props.product)} className="btn btn-secondary w-full block text-white rounded-t-none
-                      absolute bottom-0 hover:bg-pink-400">Add to Cart  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                      absolute bottom-0 hover:bg-pink-400">Add to Cart  <FontAwesomeIcon icon={faShoppingCart}/></button>
         </div>
     );
 };
