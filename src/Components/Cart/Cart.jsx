@@ -3,11 +3,13 @@ import React from 'react';
 const Cart = ({cart}) => {
     //const cart = props.cart; option -1;
     // const {cart} = props; option-2;
-    console.log(cart);
+    //console.log(cart);
 
     let totalPrice =0;
+   
     for(const product of cart){
          totalPrice = totalPrice + product.price;
+        
     }
 
     const tax = totalPrice*3/100;
